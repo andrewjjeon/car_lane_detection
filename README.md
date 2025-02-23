@@ -30,15 +30,11 @@ python data_visualize.py
 I elected for a crude, but functional approach to Ego Lane Detection. It is a solid basis that can be improved for complicated scenes with more curvature. My approach can get decent detections if the ego car is moving in the same coordinate direction as the lane. My approach will struggle when the lane ahead curves significantly. This is mainly due to how my region of interest is defined which is the main improvement that could be made to my approach. My approach filters the raw point cloud data through 3 filters. An intensity filter, region of interest filter, and a left-right split filter. 
 
 1.	Intensity Filter
-I realized that most of the road would likely be asphalt or dark. I concluded that lane line points would be a minority in the point cloud, and they would likely have a higher intensity. This is the justification for my intensity filter. A histogram or a print out of the count distribution shows which intensities we could potentially filter out.
+I realized that most of the road would likely be asphalt or dark. I concluded that lane line points would be a minority in the point cloud, and they would likely have a higher intensity. This is the justification for my intensity filter. A histogram or a print out of the count distribution shows which intensities we could potentially filter out. Under the assumption that the asphalt, low intensity points would be the majority I decided to filter out the lowest intensity points. My methodology for picking specific values to filter out followed a trial-error approach. I examined the distribution for each point cloud and decided to filter out the highest count, examples like the one above show that filtering out intensities 0-2 makes sense as the intensity of 2 has 16,000 points, which is significantly higher than any other intensity. This makes it a good candidate for representing asphalt. I also decided to filter out the highest intensity points, as I believe these would be things like mirrors or cars. 
 
 <p align="center">
   <img src="images/intensity_distribution.png" alt="Point Intensity Count Distribution">
 </p>
-
-Under the assumption that the asphalt, low intensity points would be the majority I decided to filter out the lowest intensity points. My methodology for picking specific values to filter out followed a trial-error approach. I examined the distribution for each point cloud and decided to filter out the highest count, examples like the one above show that filtering out intensities 0-2 makes sense as the intensity of 2 has 16,000 points, which is significantly higher than any other intensity. This makes it a good candidate for representing asphalt. I also decided to filter out the highest intensity points, as I believe these would be things like mirrors or cars. 
-
-
 
 
 2.	Region-of-Interest Filter
@@ -51,14 +47,11 @@ Because this is ego lane detection, we should only care about the closest right 
 
 
 2.1 Limitations and Future Work
-The primary limitation of my approach is this region-of-interest filter. Right now I’m defining my region of interest as 30-40 meters ahead and behind the car and 3.5 meters left and right of the car. This roughly looks like the red rectangular region below. With this visualization, it’s easy to see why this approach performs poorly on scenes with significant lane curvature. The filters are based on the car’s coordinate direction so the majority of the “correct” lane points are filtered out!
+The primary limitation of my approach is this region-of-interest filter. Right now I’m defining my region of interest as 30-40 meters ahead and behind the car and 3.5 meters left and right of the car. This roughly looks like the red rectangular region below. With this visualization, it’s easy to see why this approach performs poorly on scenes with significant lane curvature. The filters are based on the car’s coordinate direction so the majority of the “correct” lane points are filtered out! A potential solution for this problem, which I was unable to implement in time, is adaptive windowed region-of-interest filtering. Instead of 1 big filter defined in the ego car’s coordinate direction, we could consider smaller windows at a time, get initial lane detections in this smaller window and rotate the next window to match the previously detected lane direction in the previous window. A rough visualization of the approach can be seen below. This will likely significantly improve performance in scenes with significant lane curvature.
  
 <p align="center">
   <img src="images/current_approach.png" alt="Current Region-of-Interest">
 </p>
-
-A potential solution for this problem, which I was unable to implement in time, is adaptive windowed region-of-interest filtering. Instead of 1 big filter defined in the ego car’s coordinate direction, we could consider smaller windows at a time, get initial lane detections in this smaller window and rotate the next window to match the previously detected lane direction in the previous window. A rough visualization of the approach can be seen below. This will likely significantly improve performance in scenes with significant lane curvature.
-
  
 <p align="center">
   <img src="images/proposed_approach.png" alt="Proposed Windowed Region-of-Interest approach">
