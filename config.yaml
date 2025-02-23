@@ -1,0 +1,79 @@
+pc_id: "1553565729015329642"
+xROI: 40
+yROI: 3.5
+intensity_min: 3
+intensity_max: 23
+roi_wleft: 1  # increase the left ROI bound to capture lane curvature better
+
+# pc_id: "1553565776121143870"
+# xROI: 40
+# yROI: 3
+# intensity_min: 3
+# intensity_max: 31
+# roi_wleft: 0
+
+# pc_id: "1553565884136495856"
+# xROI: 40
+# yROI: 3
+# intensity_min: 3
+# intensity_max: 31
+# roi_wleft: 0
+
+# pc_id: "1553567105504169477"
+# xROI: 40
+# yROI: 3.5
+# intensity_min: 4
+# intensity_max: 20
+# roi_wleft: 0
+
+# pc_id: "1553669108359991937"
+# xROI: 40
+# yROI: 3.5
+# intensity_min: 3
+# intensity_max: 25
+# roi_wleft: 0.5
+
+# pc_id: "1553670562447716965"
+# xROI: 40
+# yROI: 3.5
+# intensity_min: 6
+# intensity_max: 29
+# roi_wleft: 0
+
+# pc_id: "1553670669147427892"
+# xROI: 40
+# yROI: 3.5
+# intensity_min: 2
+# intensity_max: 31
+# roi_wleft: 0
+
+# pc_id: "1553670684146333606"
+# xROI: 30
+# yROI: 3.5
+# intensity_min: 6
+# intensity_max: 38
+# roi_wleft: 1
+
+# pc_id: "1553670931248857912"
+# xROI: 40
+# yROI: 3.5
+# intensity_min: 2
+# intensity_max: 32
+# roi_wleft: 1
+
+# pc_id: "1553671068147021752"
+# xROI: 40
+# yROI: 3.5
+# intensity_min: 4
+# intensity_max: 25
+# roi_wleft: 1
+
+# pc_id: "1553672341938522335"
+# xROI: 40
+# yROI: 3.5
+# intensity_min: 10
+# intensity_max: 24
+# roi_wleft: 10.5
+
+
+# 3606, 6965, 7892, 3606, 1752, 2335 weird
