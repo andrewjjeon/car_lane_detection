@@ -1,7 +1,7 @@
 # Automobile Ego Lane Detection
 
 
-### Task description
+### Goal
 
 The goal of this project is to return a 3-degree polynomial fitting of the left and right ego lane. Our data is mostly top-down so we will be ignoring z coordinates and only detecting right and left ego lane lines.
 ```
@@ -14,6 +14,8 @@ y = coef[0] * x ** 3 + coef[1] * x ** 2 + coef[2] * x + coef[3]
 + `point[3]` is the intensity value of the lidar reflection of each point
 + `point[4]` tells you which lidar beam the point came from, there are 32 lidar beams in this datset
 
+### Environment
+
 Please setup the environment with the dependencies listed in requirement.txt
 ```
 conda create --name lane_test python==3.8
@@ -21,8 +23,8 @@ conda activate lane_test
 pip install -r vis_requirement.txt
 python data_visualize.py
 ```
-Use data_visualize.py to visualize the points clouds and the lane detections.
-Use lane_detection.py to generate polynomial fits of the ego lane lines. Further improvements to the lane detection pipeline can be made here.
+- Use data_visualize.py to visualize the points clouds and the lane detections.
+- Use lane_detection.py to generate polynomial fits of the ego lane lines. Further improvements to the lane detection pipeline can be made here.
 
 
 I elected for a crude, but functional approach to Ego Lane Detection. It is a solid basis that can be improved for complicated scenes with more curvature. My approach can get decent detections if the ego car is moving in the same coordinate direction as the lane. My approach will struggle when the lane ahead curves significantly. This is mainly due to how my region of interest is defined which is the main improvement that could be made to my approach. My approach filters the raw point cloud data through 3 filters. An intensity filter, region of interest filter, and a left-right split filter. 
