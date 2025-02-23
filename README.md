@@ -44,7 +44,7 @@ After attempting lane detection on the intensity-filtered point cloud, the polyn
 Because this is ego lane detection, we should only care about the closest right lane line and left lane line. This is the basis upon which I defined my region of interest. A google search told me that the average lane line width in meters is around 3.5-3.8 meters in most countries. I tried multiple values but settled on 3.5. The reasoning is that if this is the lane width, the closest lane line will be within 3.5 meters to the right or left from the car, no matter what. The point cloud data seemed to mostly already be on the ground plane, so I chose not to do any z-filtering. So, we only have to define a region of interest on the x and y planes. We can use 3.5 to define our y or right-left region-of-interest bounds. For certain scenes where the cars coordinate direction was significantly different from the lane’s coordinate direction, I considered a larger left bound to try to capture more of the curvature. For the x forward-backward bound, I followed a trial-error approach, generally xbounds of 30 meters – 40 meters seemed to perform well.
  
 <p align="center">
-  <img src="images/coordinate_system.png" alt="Coordinate system of ego car and point cloud" width="800">
+  <img src="images/coordinate_system.png" alt="Coordinate system of ego car and point cloud" width="400">
 </p>
 
 
