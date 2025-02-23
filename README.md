@@ -44,8 +44,9 @@ After attempting lane detection on the intensity-filtered point cloud, the polyn
 Because this is ego lane detection, we should only care about the closest right lane line and left lane line. This is the basis upon which I defined my region of interest. A google search told me that the average lane line width in meters is around 3.5-3.8 meters in most countries. I tried multiple values but settled on 3.5. The reasoning is that if this is the lane width, the closest lane line will be within 3.5 meters to the right or left from the car, no matter what. The point cloud data seemed to mostly already be on the ground plane, so I chose not to do any z-filtering. So, we only have to define a region of interest on the x and y planes. We can use 3.5 to define our y or right-left region-of-interest bounds. For certain scenes where the cars coordinate direction was significantly different from the lane’s coordinate direction, I considered a larger left bound to try to capture more of the curvature. For the x forward-backward bound, I followed a trial-error approach, generally xbounds of 30 meters – 40 meters seemed to perform well.
  
 <p align="center">
-  <img src="images/coordinate_system.png" alt="Coordinate system of ego car and point cloud">
+  <img src="images/coordinate_system.png" alt="Coordinate system of ego car and point cloud" width="800">
 </p>
+
 
 2.1 Limitations and Future Work
 The primary limitation of my approach is this region-of-interest filter. Right now I’m defining my region of interest as 30-40 meters ahead and behind the car and 3.5 meters left and right of the car. This roughly looks like the red rectangular region below. With this visualization, it’s easy to see why this approach performs poorly on scenes with significant lane curvature. The filters are based on the car’s coordinate direction so the majority of the “correct” lane points are filtered out!
@@ -71,4 +72,7 @@ The car coordinate frame has x defined as forward and y defined as left. After t
 4.	Polynomial Fitting to Left and Right Point Clouds
 Finally, I fed my left point cloud x values and y values to np.polyfit with a degree of 3. I did the same for the right point cloud values to get my left lane line fit and right lane line fit. These are the 3rd-order polynomials that I used as my outputs. Please see visualizations below.
 
-![Scene 0 Lane Detection Result](images/result0.png)
+<p align="center">
+  <img src="images/result0.png" alt="Scene 0 Lane Detection Result">
+</p>
+
