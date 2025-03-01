@@ -33,7 +33,10 @@ My approach to Ego Lane Detection is a solid basis that can be improved for comp
 - Intensity Filter
 Most points of a road will be asphalt with darker lidar intensities, lane line points would be a minority with higher intensities. This is the justification for my intensity filter. A histogram or a print out of the count distribution shows which intensities we could potentially filter out. Under the assumption that the asphalt, low intensity points would be the majority I decided to filter out the lowest intensity points.
 
-<p><img src="images/intensity_distribution.png" alt="Point Intensity Count Distribution"></p>
+<p style="margin-left: 50px;">
+    <img src="images/intensity_distribution.png" alt="Point Intensity Count Distribution">
+</p>
+
 
 - Region-of-Interest Filter
 Because this is ego lane detection, we should only care about the closest right lane line and left lane line. This is the basis upon which I defined my region of interest. The average lane line width in meters is around 3.5-3.8 meters in most countries, consequently the closest lane line will be within 3.5 meters to the right or left from the car, no matter what. This is the basis with which we define the region of interest to examine for ego lane lines.
