@@ -26,15 +26,14 @@ python data_visualize.py
 - Use data_visualize.py to visualize the points clouds and the lane detections.
 - Use lane_detection.py to generate polynomial fits of the ego lane lines. Further improvements to the lane detection pipeline can be made here.
 
+### Approach
 
 My approach to Ego Lane Detection is a solid basis that can be improved for complicated scenes with more curvature. My approach can get decent detections if the ego car is moving in the same general direction as the lane. My approach will struggle when the lane ahead curves significantly. This is mainly due to how my region of interest is defined which is the main improvement that could be made to my approach. My approach filters the raw point cloud data through 3 filters. An intensity filter, region of interest filter, and a left-right split filter. 
 
 - Intensity Filter
 Most points of a road will be asphalt with darker lidar intensities, lane line points would be a minority with higher intensities. This is the justification for my intensity filter. A histogram or a print out of the count distribution shows which intensities we could potentially filter out. Under the assumption that the asphalt, low intensity points would be the majority I decided to filter out the lowest intensity points.
 
-<p align="center">
-  <img src="images/intensity_distribution.png" alt="Point Intensity Count Distribution">
-</p>
+<p><img src="images/intensity_distribution.png" alt="Point Intensity Count Distribution"></p>
 
 - Region-of-Interest Filter
 Because this is ego lane detection, we should only care about the closest right lane line and left lane line. This is the basis upon which I defined my region of interest. The average lane line width in meters is around 3.5-3.8 meters in most countries, consequently the closest lane line will be within 3.5 meters to the right or left from the car, no matter what. This is the basis with which we define the region of interest to examine for ego lane lines.
